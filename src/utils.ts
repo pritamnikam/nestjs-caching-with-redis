@@ -17,3 +17,22 @@ export function getDogs() {
       }, 1000);
     });
 }
+
+export function getCats() {
+  return new Promise((resolve, _) => {
+    setTimeout(() => {
+      resolve([
+        {
+          id: 1,
+          name: "Vas",
+          breed: "moggie",
+        },
+        {
+          id: 2,
+          name: "Clover",
+          breed: "Blue Russian",
+        },
+      ]);
+    }, 1000);
+  });
+}
