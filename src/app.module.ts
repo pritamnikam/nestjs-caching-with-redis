@@ -1,17 +1,17 @@
-import { CacheModule, Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
+import { CacheModule, Module } from '@nestjs/common';
+import * as redisStore from 'cache-manager-redis-store';
+import type { RedisClientOptions } from 'redis';
 
-// Note that we declare the module as global with isGlobal set to true.
-// This way we don't need to re-import the caching module if we want to
-// use it in a specific service or controller.
+import { AppController } from './app.controller';
+
 @Module({
   imports: [
-    CacheModule.register({
+    CacheModule.register<RedisClientOptions>({
       isGlobal: true,
+      store: redisStore,
+      url: 'redis://localhost:6379',
     }),
   ],
-  controllers: [AppController]
+  controllers: [AppController],
 })
-export class AppModule {
-
-}
+export class AppModule {}
